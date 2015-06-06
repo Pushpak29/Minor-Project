@@ -430,7 +430,7 @@ var line_mouse_down = function(){
     };
 
 
-var temp_list_of_sector_id = "The sectors in " + Room_id + " are ";
+var temp_list_of_sector_id = "";
 
 var poly_mouse_down = function(){        
         if(ChooseDelete){
@@ -446,7 +446,7 @@ var poly_mouse_down = function(){
             layer.drawScene();
             //testing = this.getName();
             SecArr[Number(this.getId())][5] = Room_id;
-            temp_list_of_sector_id = temp_list_of_sector_id + " " + this.getId() + " ";
+            temp_list_of_sector_id = temp_list_of_sector_id + this.getId() + "; ";
         }
     };
 
@@ -889,16 +889,29 @@ function  AddSector(){
    }
 
    function ChooseSector4Room(){
-        Salert("Inside Choose Sector");
-        ChooseSector = 1;
-        
+        //alert("Inside Choose Sector");
+        ChooseSector = 1;  
+        Message.setText("Choose Sectors");
+        Message.setFill("blue");
+        layer1.drawScene();       
+
    }
 
    function AddRoom(){
         ChooseSector = 0;
         //alert(temp_list_of_sector_id);
+        
+        $('#roomModal').modal('toggle');
+        document.getElementById('roomID').innerHTML = Room_id;
+        document.getElementById('sectorIDs_room_span').innerHTML = temp_list_of_sector_id;
+
+
+
         Room_id++;
-        temp_list_of_sector_id = "The sectors in " + Room_id + " are ";
+        temp_list_of_sector_id = "";
+
+        Message.setText("");
+        layer1.drawScene();
    }
         
         
