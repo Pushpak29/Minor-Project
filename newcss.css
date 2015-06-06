@@ -1,0 +1,23 @@
+#container{
+    /* width can not be applied in percent since we are using canvas element. */
+    border:solid 1px #ccc;*/
+    width: 850px;
+    height: 580px;  
+
+}
+#upper{
+    border-bottom: solid 2px #ccc;
+    /* width can not be applied in percent since we are using canvas element. */
+    width: 850px;
+    height: 30px;
+    /*float: left;*/
+}
+
+#tools{
+	/*border: solid 1px #ccc;*/
+	/*height: 620px;*/
+	/*float: right;*/
+    /*border: solid 1px #ccc;
+    
+    width: 120px;*/
+}

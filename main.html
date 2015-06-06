@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Map Maker</title> 
+        
+        <link rel="stylesheet" href="bootstrap.min.css">
+        <link href="newcss.css" rel="stylesheet" type="text/css">
+        <script src="Global.js" language="javascript"></script>
+    	<script src="XMLWriter.js" language="javascript"></script>
+        <script src="jquery-1.11.2.min.js" type="text/javascript"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head>
+    
+    <body>
+
+       <script src="kinetic-v4.5.0.min.js"></script>
+        
+        
+          
+        
+        <div class="container-fluid">  
+            <div class="row">
+                
+            <div class="col-md-9">
+                <div  style="position:fixed;">   
+                    <div id="upper"></div>
+                    <div id="container"></div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 well">
+                <div id="tools">
+                    <center><h4> INALSI Map-Maker Tool-Kit </h4> </center>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                  Details
+                                </a>
+                              </h4>
+                            </div>
+
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    User Width (in cms) : <span id="userW"></span> <br> 
+                                    User Height (in cms) : <span id="userH"></span> <br>
+                                    Canvas Width (in px) : <span id="CanvasWidth"></span><br>
+                                    Multiplying factor : <span id="fact"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                  Choose Position
+                                </a>
+                              </h4>
+                            </div>
+                             <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <div class="form-inline">
+                                        <label>Choose Position</label><br>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="Xin" placeholder="X" size="4">
+                                        <input class="form-control" type="text" name="Yin" placeholder="Y" size="4">
+                                     </div>
+                                    
+                                        <button class="btn btn-primary" onclick="EnterPoints()"> Go </button>
+                                     </div>   
+                                  
+                                    <p> 
+                                    	<br>
+                                    	<label>Current Position : </label> 
+                                        <label> ( <span id="X"></span></label>
+                                    	<label>, <span id="Y"></span> ) </label>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  Wall/Door
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">   
+                                   <!--  <form name="LineLength" class="form-inline">                                        
+                                            <label>Length(in cm) :</label> <input class="form-control" type="text" name="length" size="3">
+                                            <button class="btn btn-primary" onclick="DrawLine()">     Add Wall    </button>
+                                        	<br>                                        	
+                    	                    <label class="radio-inline"><input type="radio" name="direction" value="left">Left</label>
+                    	                    <label class="radio-inline"><input type="radio" name="direction" value="right"> Right</label> 
+                    	                    <label class="radio-inline"><input type="radio" name="direction" value="top"> Top</label>  
+                    	                    <label class="radio-inline"><input type="radio" name="direction" value="bottom"> Bottom</label>
+                                    </form> -->
+                                    <div class="form-inline">
+                                        <input class="form-control" type="text" id="linelength" placeholder="Length (cms)" size="10">
+                                        <button class="btn btn-primary" onclick="DrawLine()">Add Wall</button><br>
+                                        <label class="radio-inline"><input type="radio" name="direction" value="left">Left</label>
+                                        <label class="radio-inline"><input type="radio" name="direction" value="right"> Right</label> 
+                                        <label class="radio-inline"><input type="radio" name="direction" value="top"> Top</label>  
+                                        <label class="radio-inline"><input type="radio" name="direction" value="bottom"> Bottom</label><br>
+                                    </div><br>
+                                    <div class="form-inline">
+                                    	<input class="form-control" type="text" name="doorName" placeholder="Door Name" size="15"> &nbsp; &nbsp;
+                                    	<button class="btn btn-primary" onclick="DrawDoor()">Add Door</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFour">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                  Sectors
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                <div class="panel-body">  
+                                        <form name="Sector" class="form-inline">
+                                        	<label>Sector Name : </label> <input class="form-control" type="text" name="name">
+                                        </form>
+                                            
+                                            <p> posX : <span id="SectorposX"></span> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                posY : <span id="SectorposY"></span>  &nbsp; &nbsp;<br>
+                                                lenX : <span id="SectorlenX"></span>   &nbsp; &nbsp; &nbsp; &nbsp;
+                                                lenY : <span id="SectorlenY"></span>   &nbsp; &nbsp;  </p>
+                                        
+                                        <button id="listen" class="btn btn-primary" onclick="chooseSectorPoints()">Choose Sector Points</button>
+                                        <button class="btn btn-primary" onclick="AddSector()">Add Sector</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFive">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                  Rooms
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="panel-body"> 
+                                    <button class="btn btn-primary" onclick="ChooseSector1()">Choose Sectors</button> &nbsp; &nbsp;
+                                    <button class="btn btn-primary" onclick="AddRoom()">Add Room</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSix">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseFive">
+                                  Delete Objects
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                <div class="panel-body"> 
+                                    <button class="btn btn-primary" onclick="ChooseWall()">Choose Object to Delete</button> &nbsp; &nbsp;
+                                    <button class="btn btn-primary" onclick="DeleteObject()">Delete</button> 
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingSeven">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                  Save
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                                <div class="panel-body"> 
+                                    <button class="btn btn-primary" onclick="SaveJSON()">Save Map</button> &nbsp; &nbsp;                
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingEight">
+                              <h4 class="panel-title">
+                                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                  XML
+                                </a>
+                              </h4>
+                            </div>
+                            <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                                <div class="panel-body"> 
+                                    <button class="btn btn-primary" onclick="SaveBase64()">Print Map</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div> 
+           </div>
+            </div>
+        </div>
+
+
+    
+       <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+    
+        
+        
+        
+        <script src="mainJS.js" type="text/javascript"> </script>
+    </body>
+</html>
