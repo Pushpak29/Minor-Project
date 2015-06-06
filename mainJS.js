@@ -713,10 +713,16 @@ function  AddSector(){
             poly.on('mouseover', poly_mouse_over);
             poly.on('mouseout', poly_mouse_out);
 
-             $('#myModal').modal('show');
+             $('#myModal').modal('toggle');
+             // $('#myModal').modal('backdrop');
+
+
+
             
             
-            alert("Sector_id is " + Sector_id);
+           // alert("Sector_id is " + Sector_id);
+            document.getElementById('sectorID').innerHTML = Sector_id;
+            document.getElementById('sectorName_span').innerHTML = SectorName;
             
             SecArr[Sector_id][0] = SectorName;
             SecArr[Sector_id][1] = PosX;
@@ -882,15 +888,15 @@ function  AddSector(){
 
    }
 
-   function ChooseSector1(){
-        alert("Inside Choose Sector");
+   function ChooseSector4Room(){
+        Salert("Inside Choose Sector");
         ChooseSector = 1;
         
    }
 
    function AddRoom(){
         ChooseSector = 0;
-        alert(temp_list_of_sector_id);
+        //alert(temp_list_of_sector_id);
         Room_id++;
         temp_list_of_sector_id = "The sectors in " + Room_id + " are ";
    }
