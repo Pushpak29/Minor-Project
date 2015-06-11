@@ -1,6 +1,6 @@
 #container{
     /* width can not be applied in percent since we are using canvas element. */
-    border:solid 1px #ccc;*/
+    border:solid 1px #ccc;
     width: 850px;
     height: 580px;  
 
