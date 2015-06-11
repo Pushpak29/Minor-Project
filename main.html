@@ -23,13 +23,13 @@
             <div class="row">
                 
             <div class="col-md-9">
-                <div  style="position:fixed;">   
+                <div>   
                     <div id="upper"></div>
                     <div id="container"></div>
                 </div>
             </div>
             
-            <div class="col-md-3 well">
+            <div class="col-md-3 well" style="position:fixed; right: 0;">
                 <div id="tools">
                     <center><h4> INALSI Map-Maker Tool-Kit </h4> </center>
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -87,7 +87,7 @@
                             <div class="panel-heading" role="tab" id="headingThree">
                               <h4 class="panel-title">
                                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                  Wall/Door
+                                  Wall / Door / Lift
                                 </a>
                               </h4>
                             </div>
@@ -113,6 +113,10 @@
                                     <div class="form-inline">
                                     	<input class="form-control" type="text" name="doorName" placeholder="Door Name" size="15"> &nbsp; &nbsp;
                                     	<button class="btn btn-primary" onclick="DrawDoor()">Add Door</button>
+                                    </div><br>
+                                    <div class="form-inline">
+                                        <input class="form-control" type="text" name="liftName" placeholder="Lift Name" size="15"> &nbsp; &nbsp;
+                                        <button class="btn btn-primary" onclick="DrawLift()">Add Lift</button>
                                     </div>
                                 </div>
                             </div>
